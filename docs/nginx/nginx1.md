@@ -72,3 +72,43 @@ server {
 }
 ```
 这是一个简单的server块，监听8080端口（此前，listen指令没有被提起是由于已经使用了标准的80端口），并将所有的请求 映射到本地文件系统的/data/up1目录。创建这个目录，并将index.html文件放置其中。注意root指令已经被放置在server环境中。 当location块被选中服务请求时，root指令就会被使用，当然不包括自己的root指令。
+
+修改第一个location块，放置`proxy_pass`指令与协议、名称和参数中指定的代理服务器端口
+```
+server {
+    location / {
+        proxy_pass http://localhost:8080;
+    }
+    location /images/ {
+        root /data;
+    }
+}
+```
+修改第二个location块，它目前映射所有带/images/前缀的请求到/data/images 目录下的文件，是为了使其符合典型的文件扩展的图像请求
+``` 
+location ~ \.(gif|jpg|png)$ {
+    root /data/images;
+}
+```
+该参数是一个正则表达式，匹配所有.gif,.jpg,.png 结尾的路由。正则表达式应该优于～。相应的请求都会被映射到 /data/images目录。
+
+当nginx选择一个location块服务一个请求时，它首先检查location指令的指定前缀，记住location最长的前缀， 然后检查正则表达式。如果有一个匹配的正则表达式，nginx会挑选location块，否则它会选择之前的。
+因此代理服务器的配置文件应该是这样的:
+```
+server {
+    location / {
+        proxy_pass http://localhost:8080/;
+    }
+    location ~ \.(gif|jpg|png)$ {
+        root /data/images;
+    }
+}
+```
+此服务器会筛选出以.gif,.jpg,.png 结尾的请求，并将他们映射到/data/images目录下(通过添加URI到root指令的参数上)， 然后通过所有其它请求到代理服务器配置上
+
+`nginx -s reload` 重启配置使更改生效
+
+### 4. FastCGI代理
+nginx可用于路由请求FastCGI服务器，FastCGI服务器运行各种不同的框架和编程语言，如PHP，建立的应用。
+
+最常用与 FastCGI server工作的nginx配置，用fastcgi_pass指令替代了proxy_pass指令，并设置fastcgi_param 参数传递给FastCGI server。假设FastCGI server通过localhost:9000可以访问。 以上一节代理配置作为基础，用fastcgi_pass指令替换proxy_pass指令，并修改参数为localhost:9000。在PHP中， SCRIPT_FILENAME参数用来确定脚本名，QUERY_STRING参数用来传递请求参数。
