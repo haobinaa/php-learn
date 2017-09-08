@@ -112,3 +112,15 @@ server {
 nginx可用于路由请求FastCGI服务器，FastCGI服务器运行各种不同的框架和编程语言，如PHP，建立的应用。
 
 最常用与 FastCGI server工作的nginx配置，用fastcgi_pass指令替代了proxy_pass指令，并设置fastcgi_param 参数传递给FastCGI server。假设FastCGI server通过localhost:9000可以访问。 以上一节代理配置作为基础，用fastcgi_pass指令替换proxy_pass指令，并修改参数为localhost:9000。在PHP中， SCRIPT_FILENAME参数用来确定脚本名，QUERY_STRING参数用来传递请求参数。
+```
+server {
+    location / {
+        fastcgi_pass  localhost:9000;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param QUERY_STRING    $query_string;
+    }
+    location ~ \.(gif|jpg|png)$ {
+        root /data/images;
+    }
+}
+```
