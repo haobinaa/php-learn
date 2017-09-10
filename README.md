@@ -8,7 +8,10 @@
 目录：
 
     |--- docs 文档目录
-    |------ operator    //操作符控制使用
+    |------ php
+    |---------operator  // 用&来控制权限
+    |---------autoload  // 自动注册机制
+    |---------reference //引用
     |------nginx    
     |--------- nginx1   //nginx的基本使用
     |--------- nginx2   //nginx配置文件参考
@@ -18,4 +21,5 @@
 参考文献：
 - [YLD-with-PHP](https://github.com/YuanLianDu/YLD-with-Php)
 - 高性能的PHP与MySQL开发
+- PHP与MYSQL权威指南
     
