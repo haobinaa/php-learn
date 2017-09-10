@@ -9,9 +9,10 @@
 
     |--- docs 文档目录
     |------ operator    //操作符控制使用
-    |------nginx    //nginx使用
+    |------nginx    
     |--------- nginx1   //nginx的基本使用
-    |------mysql    //mysql使用    
+    |--------- nginx2   //nginx配置文件参考
+    |------mysql        
     
 参考文献：
 - [YLD-with-PHP](https://github.com/YuanLianDu/YLD-with-Php)
