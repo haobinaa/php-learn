@@ -12,6 +12,7 @@
     |------nginx    
     |--------- nginx1   //nginx的基本使用
     |--------- nginx2   //nginx配置文件参考
+    |--------- nginx_fastcgi    //nginx与PHP通信
     |------mysql        
     
 参考文献：
