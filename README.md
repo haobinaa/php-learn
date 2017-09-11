@@ -17,7 +17,8 @@
     |--------- nginx1   //nginx的基本使用
     |--------- nginx2   //nginx配置文件参考
     |--------- nginx_fastcgi    //nginx与PHP通信
-    |------mysql        
+    |------mysql       
+    |---------basic // 基本操作 
     
 参考文献：
 - [YLD-with-PHP](https://github.com/YuanLianDu/YLD-with-Php)
