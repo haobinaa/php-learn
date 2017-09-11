@@ -12,6 +12,7 @@
     |---------operator  // 用&来控制权限
     |---------autoload  // 自动注册机制
     |---------reference //引用
+    |---------data_type //数据类型
     |------nginx    
     |--------- nginx1   //nginx的基本使用
     |--------- nginx2   //nginx配置文件参考
@@ -22,4 +23,6 @@
 - [YLD-with-PHP](https://github.com/YuanLianDu/YLD-with-Php)
 - 高性能的PHP与MySQL开发
 - PHP与MYSQL权威指南
+
+如果有什么问题或者建议可以联系我：QQ（815754194）
     
