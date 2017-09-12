@@ -21,11 +21,14 @@
     |------mysql       
     |---------basic // 基本操作 
     |---------slow_query    //慢查询
+    |---------transaction   //事务
     
 参考文献：
 - [YLD-with-PHP](https://github.com/YuanLianDu/YLD-with-Php)
 - 高性能的PHP与MySQL开发
 - PHP与MYSQL权威指南
+- 博客园
+- 高性能的MySQL
 
 如果有什么问题或者建议可以联系我：QQ（815754194）
     
