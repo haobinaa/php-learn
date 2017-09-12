@@ -95,3 +95,21 @@ delete from tbl_name [where where_condition]
 ALTER TABLE user ALTER num SET DEFAULT 0;
 ALTER TABLE user ALTER num DROP DEFAULT;
 ```
+(4)非空约束
+(5)外键约束
+1.保证了数据的一致性，实现了1对1,1对多的关系
+2.cascade：从父表中删除或更新且自动删除或更新子表中的匹配行
+3.set nul： 从父表删除或更新并设置子表中的外键列为null。如果使用该选项，必须保证子表没有指定not null
+4.restrict：拒绝对父表的删除或更新操作
+``` 
+添加外键约束：
+ alter table tbl_name add [constraint [symbol]] foreign key [index_name] (index_col_name,...) reference_definition
+ 例：ALTER TABLE user ADD FOREIGN KEY (cid) REFERENCES cate (id)
+ 删除外键约束：
+ alter table tbl_name drop foreign key symbol
+  例：ALTER TABLE user DROP FOREIGN KEY cid;
+```
+###五、子查询
+嵌套在内部，始终出现在括号内;
+可以包含多个关键字或条件，如distinct，group by，order by，limit，函数等;
+外层可以是：select，insert，update，set
