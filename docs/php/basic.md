@@ -23,7 +23,20 @@ if($a=3 > 0 || $b =3 > 0) {
 }
 ```
 结果$a=1,$b=1;因为 > 优先级高于 || 高于 =，所以先执行3>0所以$a=true,直接执行if的代码块
+
+###二、流程控制
 - PHP除了for和foreach之外，还有一种循环的方式list() each() while()
 ```  
-
+$array = [
+    'a' => 'apple',
+    'b' => 'banana',
+    'c' => 'carrot',
+];
+// each提取出当前元素的key、value并向前移动数组指针
+while(list($key, $value) = each($array)){
+    var_dump($key,$value);
+    echo "<br>";
+}
 ```
+foreach与while-list-each的区别是，foreach遍历前会reset数组指针，而while-list-each则不会。
+###三、作用域以及静态变量
