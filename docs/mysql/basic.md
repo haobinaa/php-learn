@@ -1,4 +1,4 @@
-##MySQL基本操作
+## MySQL基本操作
 
 ### 一、常用命令
 - veresion();    //显示当前服务版本
@@ -34,7 +34,7 @@ drop {database|schema} [if exists] db_name
 例：DROP DATABASE test;
 ```
 
-###三、常用数据表操作
+### 三、常用数据表操作
 1.创建表
 ``` 
 create table [if not exists] tbl_name(
@@ -77,7 +77,7 @@ delete from tbl_name [where where_condition]
 例：DELETE FROM user WHERE id=3;
 ```
 
-###四、约束性
+### 四、约束性
 (1)主键约束：primary key
 1. 每个表只存在一个
 2. 保证记录的唯一性
@@ -124,7 +124,7 @@ select * from t1 where col_name1 >= ANY (select col_name2 from t2);
 select * from t1 where col_name1 NOT IN ALL (select col_name2 from t2);
 ```
 
-###六、连接查询
+### 六、连接查询
 1. 内连接（inner join）
 2. 外连接
 left join(坐连接，左边的所有行匹配右边的符合条件的行)  right join（右连接，右全而坐匹配）
