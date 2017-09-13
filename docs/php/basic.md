@@ -40,3 +40,38 @@ while(list($key, $value) = each($array)){
 ```
 foreach与while-list-each的区别是，foreach遍历前会reset数组指针，而while-list-each则不会。
 ### 三、作用域以及静态变量
+
+- 局部变量是无法使用全局变量的
+``` 
+// 全局变量
+$outer = 'str';
+function myfunc(){
+    echo $outer; ->会报错
+}
+
+//如果要在局部使用全局变量需要用global关键字:
+function myfunc(){
+    global $outer; // $GLOBALS['outer'];也可以
+    echo $outer; //str
+}
+```
+- 静态变量
+>1.静态变量仅初始化一次，并且初始化的时候需要赋值  
+2.每次执行函数都会保留该值  
+3.static是局部的变量，仅在函数内部有效  
+4.在递归的时候可以用来记录函数的调用次数，从而作为终止递归的条件
+
+``` 
+$count = 5;
+function echo_count(){
+    static  $count;
+    return $count++;
+}
+echo $count; //5
+echo "<br>";
+++$count;
+echo echo_count(); // null 没有给局部变量$count初始化
+echo "<br>";
+echo echo_count(); // 1     null + 1 =1 
+```
+

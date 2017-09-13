@@ -11,11 +11,20 @@ class Test {
         echo "i am ".get_class();
     }
 }
-$a = 0;
-$b = 0;
-if($a=3 > 0 || $b =3 > 0) {
-    $a++;
-    $b++;
-    echo $a.'\n';
-    echo $b.'\n';
+$outer = 'ster';
+function test() {
+    global  $outer;
+    echo $outer;
 }
+
+$count = 5;
+function echo_count(){
+    static  $count;
+    return $count++;
+}
+echo $count;
+echo "<br>";
+++$count;
+echo echo_count();
+echo "<br>";
+echo echo_count();
