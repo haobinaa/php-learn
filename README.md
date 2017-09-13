@@ -14,6 +14,8 @@
     |---------autoload  // 自动注册机制
     |---------reference //引用
     |---------data_type //数据类型
+    |---------file      //文件操作
+    |--------security   //Web安全
     |------nginx    
     |--------- nginx1   //nginx的基本使用
     |--------- nginx2   //nginx配置文件参考
