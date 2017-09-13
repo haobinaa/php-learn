@@ -75,3 +75,46 @@ echo "<br>";
 echo echo_count(); // 1     null + 1 =1 
 ```
 
+### 四、函数的返回值
+- 函数的引用返回：
+
+从函数返回一个引用，必须在函数声明和指派返回值给一个变量都使用&
+``` 
+function &myFunc(){
+    static $b = 10;
+    return $b;
+}
+$a = myFunc();  -> $a=10;
+$a = &myFunc(); -> $a和$b互为引用
+$a = 100; -> $a修改同时也修改了$b
+echo myFunc(); // 输出100
+```
+- 外部文件的导入
+
+require/include语句包含并运行指定的文件，如果给出路径名就会从路径名中查找，否则从include_path(环境变量)中查找，如果include_path也没有，则从调用脚本所在目录和当前工作目录下查找。当一个文件被包含的时候，其中所包含的代码继承了include所在行的变量范围。
+
+加载过程中如果没有找到文件，require会发出一个致命错误(E_COMPILE_ERROR)脚本终止；include(E_WARNING)产生一个警告，程序会继续运行
+
+总结：
+``` 
+$var1 = 5;
+$var2 = 10;
+
+function foo(&$my_var){
+    global $var1;
+    $var1 += 2;
+    $var2 = 4;
+    $my_var += 3;
+    return $var2;
+}
+
+$my_var = 5;
+
+echo foo($my_var). "\r\n"; //4 局部变量$var2
+echo $my_var. "\r\n"; // 8  引用传递改变值
+echo $var1; // 7    // 全局变量 $var1在局部函数里面+2
+echo $var2; // 10   // 全局变量$var2 并未修改过
+$bar = 'foo';
+$my_var = 10;
+echo $bar($my_var). "\n"; // 4 还是输出局部变量$var2
+```
