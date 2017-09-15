@@ -29,6 +29,7 @@
     |---------transaction   //事务
     |---------index     //索引
     |---------lock      //锁
+    |------architecture     //架构并发
     
 参考文献：
 - [YLD-with-PHP](https://github.com/YuanLianDu/YLD-with-Php)
