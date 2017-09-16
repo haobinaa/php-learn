@@ -38,3 +38,51 @@
 #       a: (refcount=1, is_ref=0)='new string
 ```
 上面的例子只是简单的说明了字符串这种简单类型，PHP中array和Object这种复合类型的时候，就会稍微复杂一点
+``` 
+<?php
+$a = array( 'meaning' => 'life', 'number' => 42 );
+xdebug_debug_zval( 'a' );
+
+#       输出结果
+a: (refcount=1, is_ref=0)=array (
+   'meaning' => (refcount=1, is_ref=0)='life',
+   'number' => (refcount=1, is_ref=0)=42
+)
+```
+这个时候会产生三个变量容器分别是a、meaning、number。我们在对程序做一些修改
+``` 
+<?php
+$a = array( 'meaning' => 'life', 'number' => 42 );
+$a['life'] = $a['meaning'];
+xdebug_debug_zval( 'a' );
+
+#   输出结果
+a: (refcount=1, is_ref=0)=array (
+   'meaning' => (refcount=2, is_ref=0)='life',
+   'number' => (refcount=1, is_ref=0)=42,
+   'life' => (refcount=2, is_ref=0)='life'
+)
+```
+我们可以看到life和meaning是指向的同一个变量容器，所以他们的refcount都是2
+
+如果我们将一个数组元素添加给自己本身:
+``` 
+<?php
+$a = array( 'one' );
+$a[] = &$a;
+xdebug_debug_zval( 'a' );
+
+#       输出结果
+a: (refcount=2, is_ref=1)=array (
+   0 => (refcount=1, is_ref=0)='one',
+       1 => (refcount=2, is_ref=1)=...
+)
+```
+我们看到了a本身和第二个元素1的refcount为2，这样形成了一个递归循环，a的第二个元素指向了他自己。如果对$a进行unset操作，$a的变量容器引用次数减一，变成了：
+``` 
+(refcount=1, is_ref=1)=array (
+   0 => (refcount=1, is_ref=0)='one',
+   1 => (refcount=1, is_ref=1)=...
+)
+```
+尽管没有变量指向这个容器，由于他自己的第二个元素始终指向他本身，就没有办法回收这个变量容器，造成了内存泄露
