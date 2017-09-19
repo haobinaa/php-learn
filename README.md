@@ -23,7 +23,8 @@
     |--------- nginx2   //nginx配置文件参考
     |--------- nginx_fastcgi    //nginx与PHP通信
     |--------- linux_command    // Linux常用命令
-    |------mysql       
+    |------mysql
+	|---------type	// mysql数据类型
     |---------basic // 基本操作 
     |---------slow_query    //慢查询
     |---------transaction   //事务
