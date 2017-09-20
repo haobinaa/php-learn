@@ -125,28 +125,99 @@ select * from t1 where col_name1 NOT IN ALL (select col_name2 from t2);
 ```
 
 ### 六、连接查询
-1.内连接（inner join）
-等值连接、不等值连接、自连接
+1.内连接（inner join），左连接（left join）， 右连接（right join）,全连接（full join）， 交叉连接（across join）
+``` 
+现有两张表A、B
+表A
+id   name  
+1    张
+2    李
+3    王
 
-// TODO
+表B
+id   address   A_id
+1    北京      1
+2    上海      3
+3    南京      10
 
-2.外连接  
+**************left join**********
+SELECT A.name, B.address
+FROM A
+LEFT JOIN B ON A.id = B.A_id 
+结果是：
+name     address
+张     北京
+李     NULL
+王     上海
 
-left join(坐连接，左边的所有行匹配右边的符合条件的行) 
+可以看到A表（左边的表）的所有行都显示出来了，B表中没有匹配到的行是NULL值
 
-以左表为主，先查询出左表，按照on后的关联条件匹配右表，没有匹配到的用null填充  
-   
-right join（右连接，右全而坐匹配）
+************right join***********
+SELECT A.name, B.address
+FROM A
+RIGHT JOIN B ON A.id = B.A_id
+结果是：
+name     address
+张     北京
+王     上海
+NULL     南京
+与left join相反，B表（右边的表）中的行全显示出来，A表中匹配不到的行显示NULL
 
-3.交叉连接（across join）
-> 没有任何的关联查询，结果就是笛卡尔积，结果集很大，没有任何意义
+**********inner join************
+select A.name,B.address from A 
+inner join B
+on A.id = B.A_id
+结果是：
+name     address
+张     北京
+王     上海
 
+内连接等价于：
+SELECT A.name, B.address
+FROM A, B
+WHERE A.id = B.A_id
 
+内连接只返回A、B两表都有的行，相当于A、B的交集
+
+*********full join**********
+全外连接返回参与连接的两个数据集合中的全部数据，无论它们是否具有与之相匹配的行。在功能上，它等价于对这两个数据集合分别进行左外连接和右外连接，然后再使用消去重复行的并操作将上述两个结果集合并为一个结果集
+
+select * from A 
+full join B
+结果是：
+id     name     id     address A_id
+1     张     1     北京     1
+2     李     1     北京     1
+3     王     1     北京     1
+1     张     2     上海     3
+2     李     2     上海     3
+3     王     2     上海     3
+1     张     3     南京     10
+2     李     3     南京     10
+3     王     3     南京     10
+
+*********across join***********
+返回笛卡尔积，A*B
+SELECT * FROM A
+CROSS JOIN B
+结果是：
+id     name     id     address A_id
+1     张     1     北京     1
+2     李     1     北京     1
+3     王     1     北京     1
+1     张     2     上海     3
+2     李     2     上海     3
+3     王     2     上海     3
+1     张     3     南京     10
+2     李     3     南京     10
+3     王     3     南京     10
+等价于sql：
+select * from A,B
+```
 4.联合查询（union与union all）
 
 把多个结果集集中在一起
 
-5.全连接（full join）
 
 
 
