@@ -26,6 +26,10 @@ CREATE TABLE `table` (
 ```
 4.组合索引（将多个列组合在一起创建索引）
 
+***mysql执行查询中，只会使用到一个索引***  
+>最左前缀：意思是使用组合索引的时候，从左到右依次匹配，否则不会使用组合索引。  
+例如`ALTER TABLE people ADD INDEX lname_fname_age (lame,fname,age); `其实我们是建立了三个索引，分别是：单列索引lame，组合索引（lame，fname），组合索引（lame，fname，age），mysql索引的时候只会使用其中一个索引。所以创建组合索引的时候，尽量把使用频繁的放在左边
+
 
 ### 二、索引创建的原则和注意事项
 1. 最适合创建索引的是出现在where子句中的列或是出现在连接子句中的列
@@ -38,7 +42,10 @@ CREATE TABLE `table` (
 
 6.如果mysql觉得全表扫描比索引扫描快，他会自动放弃使用索引
 
-7.但是
+7.mysql查询只使用一个索引，如果where子句中使用了索引，那么order by中的列是不会使用索引的
+
+8.列中包含null值是不会使用索引的，如果column_name is null还是会使用索引，但是建表的时候尽量设置一个非null的默认值。
+
 
 
 

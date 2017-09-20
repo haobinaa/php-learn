@@ -126,18 +126,28 @@ select * from t1 where col_name1 NOT IN ALL (select col_name2 from t2);
 
 ### 六、连接查询
 1.内连接（inner join）
+等值连接、不等值连接、自连接
 
 // TODO
 
 2.外连接  
 
-left join(坐连接，左边的所有行匹配右边的符合条件的行)    
+left join(坐连接，左边的所有行匹配右边的符合条件的行) 
+
+以左表为主，先查询出左表，按照on后的关联条件匹配右表，没有匹配到的用null填充  
+   
 right join（右连接，右全而坐匹配）
 
 3.交叉连接（across join）
+> 没有任何的关联查询，结果就是笛卡尔积，结果集很大，没有任何意义
+
 
 4.联合查询（union与union all）
 
+把多个结果集集中在一起
+
 5.全连接（full join）
+
+
 
 
