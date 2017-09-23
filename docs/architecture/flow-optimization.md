@@ -172,4 +172,20 @@ location ~ .*\.(gif|jpeg|png|flv|swf|zip|rar)$
 }
 ```
 
-6.前端代码和资源的压缩
+6.前端代码和资源的压缩  
+- JavaScript压缩：去掉多余的空格和回车，替换长变量名，简写代码等
+- CSS压缩： 同样是去掉空白符、注释并且优化CSS语义规则
+- 图片压缩： 借助压缩工具压缩（tinypng、jpegMini、imageoption等）
+
+- Gzip压缩
+``` 
+Nginx配置:
+gizp on|off;    #是否开启gzip
+gzip_buffers 32 4K|16 8k #缓冲（在内存中有几块 每块多大）
+gzip_comp_level [1-9] #压缩级别（推荐使用6） 级别越高，压缩越小，越占用CPU资源
+gzip_disable #正则表达式匹配UA 什么样的uri不进行gzip 
+gzip_min_length 200 #开始压缩的最小长度
+gzip_http_version 1.0|1.1 #开始压缩的http版本协议
+gzip_types text/plain application/xml #对那些类型进行压缩，如text、css、html等
+```
+现在前端有很多工具可以对资源进行压缩，打包等。如grunt、webpack等已经很流行了。比较流行的前端框架也有相应的脚手架来帮助打包：vue-cli、angular-cli等
