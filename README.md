@@ -35,7 +35,7 @@
     |---------flow-optimization     //流量优化
     |---------browse-cache         // 浏览器缓存
     |---------db-cache              //数据库缓存
-    |---------server-blance         //服务器负载均衡
+    |---------server-balance         //服务器负载均衡
  
 参考文献：
 - [YLD-with-PHP](https://github.com/YuanLianDu/YLD-with-Php)
