@@ -5,3 +5,7 @@
  * Date: 2017/9/30
  * Time: 17:29
  */
+
+interface Login {
+    function verify();
+}

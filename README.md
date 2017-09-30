@@ -42,6 +42,7 @@ php相对于其他语言来说，在web开发领域较为方便，上手和入�
     |--------- single_point     //单点登录
     |------ design_mode     // 设计模式
     |--------- SingleTon    //单例
+    |--------- Factory      // 工厂模式
  
 参考文献：
 - [YLD-with-PHP](https://github.com/YuanLianDu/YLD-with-Php)
