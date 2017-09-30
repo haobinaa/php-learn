@@ -40,6 +40,8 @@ php相对于其他语言来说，在web开发领域较为方便，上手和入�
     |---------server-balance         //服务器负载均衡
     |------ aplication      //各种实际应用场景
     |--------- single_point     //单点登录
+    |------ design_mode     // 设计模式
+    |--------- SingleTon    //单例
  
 参考文献：
 - [YLD-with-PHP](https://github.com/YuanLianDu/YLD-with-Php)
